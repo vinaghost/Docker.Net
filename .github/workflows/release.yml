@@ -32,21 +32,11 @@ jobs:
         run: dotnet publish Docker.Net -c Release -p:PublishSingleFile=true -o bin/Docker.Net
       
       - name: Build and push update image
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v6
         with:
           file: ./Docker.Net/Dockerfile
           context: .
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPOSITORY }}:latest 
-  run:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Run
-        run: docker run ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPOSITORY_UPDATE }}:latest
 
      
