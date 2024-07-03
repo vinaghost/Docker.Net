@@ -38,7 +38,7 @@ jobs:
         run: dotnet restore --locked-mode 
 
       - name: Publish 
-        run: dotnet publish Docker.Net -c Release -p:PublishSingleFile=true -o bin/Docker.Net
+        run: dotnet publish Docker.Net -c Release -p:PublishSingleFile=true -o bin/Docker.Net --no-restore
       
       - name: Build and push update image
         uses: docker/build-push-action@v6
