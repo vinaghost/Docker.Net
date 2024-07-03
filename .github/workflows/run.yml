@@ -2,7 +2,7 @@
 # DOCKERHUB_USERNAME
 # DOCKERHUB_TOKEN
 # DOCKERHUB_REPOSITORY
-
+# SETTINGS_FILE
 name: Run Docker build
 run-name: Run Docker build
 on:
@@ -11,12 +11,16 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
+      - name: Download setting file
+        run: | 
+          - gh api ${{ secrets.SETTINGS_FILE }} -H "Accept: application/vnd.github.raw" > appsettings.json
+  
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Run
-        run: docker run ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPOSITORY }}:latest
+        run: docker run ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPOSITORY }}:latest -v /appsettings.json:/app/appsettings.json
 
      
