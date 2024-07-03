@@ -10,5 +10,5 @@ var greeting = configuration.GetValue(typeof(string), "AppSettings:Greeting")?.T
 
 var myConnectString = configuration.GetConnectionString("MyConnectionString");
 
-Console.WriteLine(greeting);
-Console.WriteLine(myConnectString);
+Console.WriteLine("Greeting: {0}", greeting);
+Console.WriteLine("Connection string: {0}", myConnectString);
