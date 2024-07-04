@@ -18,10 +18,10 @@ namespace Docker.Net
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("connections: {Connections}", _connections);
-            _logger.LogInformation("appSettings: {AppSettings}", _appSettings);
+            _logger.LogInformation("connections: {@Connections}", _connections);
+            _logger.LogInformation("appSettings single: {@AppSettings}", _appSettings);
 
-            //_hostApplicationLifetime.StopApplication();
+            _hostApplicationLifetime.StopApplication();
             return Task.CompletedTask;
         }
 
