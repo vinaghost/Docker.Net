@@ -3,7 +3,7 @@
 # DOCKERHUB_TOKEN
 # DOCKERHUB_REPOSITORY
 
-name: Release Docker build
+name: Release Docker outside build
 run-name: Build and push update image
 on:
   workflow_dispatch:
