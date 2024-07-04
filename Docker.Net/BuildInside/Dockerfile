@@ -1,6 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 COPY . . 
+RUN ["ls"]
 RUN dotnet restore Docker.Net --locked-mode
 RUN dotnet build Docker.Net -c Release -o /app/build --no-restore
 
