@@ -9,8 +9,12 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS publish
 WORKDIR /src
 COPY --from=prepare-restore-files /source/restore_subset .
 RUN dotnet restore Docker.Net/Docker.Net.csproj --locked-mode
-COPY . .
-RUN dotnet publish Docker.Net/Docker.Net.csproj -c Release -o /app/publish --no-restore
+
+# copy source code, add more if required other project
+COPY Docker.Net/ Docker.Net/
+
+WORKDIR /Docker.Net
+RUN dotnet publish Docker.Net.csproj -c Release -o /app/publish --no-restore
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
