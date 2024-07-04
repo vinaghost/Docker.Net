@@ -6,7 +6,7 @@ RUN dotnet restore Docker.Net --locked-mode
 RUN dotnet build Docker.Net -c Release -o /app/build --no-restore
 
 FROM build AS publish
-RUN dotnet publish Docker.Net -c Release -o /app/publish -p:PublishSingleFile=true --no-build
+RUN dotnet publish Docker.Net -c Release -o /app/publish --no-build
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
