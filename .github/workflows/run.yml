@@ -21,6 +21,6 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Run
         run: |
-          docker run --rm -v ./appsettings.json:/app/appsettings.json ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPOSITORY }}:latest 
+          docker run --rm -v ./appsettings.Production.json:/app/appsettings.Production.json ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPOSITORY }}:latest 
 
      
