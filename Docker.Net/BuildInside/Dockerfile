@@ -1,12 +1,9 @@
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS publish
 WORKDIR /src
 COPY . . 
 RUN ["ls"]
 RUN dotnet restore Docker.Net --locked-mode
-RUN dotnet build Docker.Net -c Release -o /app/build --no-restore
-
-FROM build AS publish
-RUN dotnet publish Docker.Net -c Release -o /app/publish --no-build
+RUN dotnet publish Docker.Net -c Release -o /app/publish --no-restore
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
