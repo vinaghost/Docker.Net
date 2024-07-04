@@ -1,9 +1,14 @@
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS prepare-restore-files
+WORKDIR /source
+COPY . .
+RUN dotnet subset restore Docker.Net/Docker.Net.csproj --root-directory /source --output restore_subset/
+
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS publish
 WORKDIR /src
-COPY . . 
-RUN ["ls"]
-RUN dotnet restore Docker.Net --locked-mode
-RUN dotnet publish Docker.Net -c Release -o /app/publish --no-restore
+COPY --from=prepare-restore-files /source/restore_subset .
+RUN dotnet restore Docker.Net/Docker.Net.csproj --locked-mode
+COPY . .
+RUN dotnet publish Docker.Net/Docker.Net.csproj -c Release -o /app/publish --no-restore
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
