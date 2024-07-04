@@ -1,14 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Docker.Net;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
-var builder = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+var builder = Host.CreateApplicationBuilder(args);
+builder.BindConfiguration();
+builder.Services.AddHostedService<StartUp>();
 
-var configuration = builder.Build();
-
-var greeting = configuration.GetValue(typeof(string), "AppSettings:Greeting")?.ToString();
-
-var myConnectString = configuration.GetConnectionString("MyConnectionString");
-
-Console.WriteLine("Greeting: {0}", greeting);
-Console.WriteLine("Connection string: {0}", myConnectString);
+var host = builder.Build();
+await host.RunAsync();
