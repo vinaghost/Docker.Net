@@ -12,12 +12,10 @@ RUN dotnet restore Docker.Net/Docker.Net.csproj --locked-mode
 
 # copy source code, add more if required other project
 COPY Docker.Net/ Docker.Net/
-RUN ["ls"]
 RUN dotnet publish Docker.Net/Docker.Net.csproj -c Release -o /app/publish --no-restore
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=publish /app/publish .
-RUN ["ls"]
 RUN ["chmod", "+x", "Docker.Net"]
 ENTRYPOINT ["./Docker.Net"]
