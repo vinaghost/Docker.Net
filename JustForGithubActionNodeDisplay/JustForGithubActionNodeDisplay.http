@@ -1,6 +1,0 @@
-@JustForGithubActionNodeDisplay_HostAddress = http://localhost:5265
-
-GET {{JustForGithubActionNodeDisplay_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
