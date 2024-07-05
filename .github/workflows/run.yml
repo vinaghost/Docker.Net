@@ -3,6 +3,8 @@
 # DOCKERHUB_TOKEN
 # DOCKERHUB_REPOSITORY
 # SETTINGS_FILE
+# PAT
+
 name: Run Docker build
 run-name: Run Docker build
 on:
